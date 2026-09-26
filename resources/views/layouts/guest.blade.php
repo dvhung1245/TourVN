@@ -15,7 +15,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-brand-neutral antialiased bg-white">
-        <div class="w-full min-h-screen flex flex-col lg:flex-row bg-white">
+        <div x-data="{ role: 'customer' }" class="w-full min-h-screen flex flex-col lg:flex-row bg-white">
             
             <!-- Left Side: Full Screen Image & Benefits -->
             <div class="hidden lg:flex lg:w-5/12 xl:w-1/2 relative flex-col justify-between p-12 xl:p-20 text-white">
@@ -27,24 +27,28 @@
 
                 <!-- Content Top -->
                 <div class="relative z-10">
-                    <a href="/" class="inline-flex items-center gap-3 group mb-12">
-                        <div class="w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/30 shadow-lg group-hover:scale-105 transition-all duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                        <span class="text-2xl font-bold text-white tracking-widest uppercase">TourVN</span>
-                    </a>
+                    <div class="flex items-center gap-4 mb-12">
+                        <a href="/" class="flex items-center gap-3 group">
+                            <div class="w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/30 shadow-lg group-hover:scale-105 transition-all duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <span class="text-2xl font-bold text-white tracking-widest uppercase hidden sm:block">TourVN</span>
+                        </a>
 
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-xs font-bold tracking-wider uppercase mb-6">
-                        <span class="w-2 h-2 rounded-full bg-brand-secondary shadow-[0_0_8px_#F97316]"></span>
-                        Thành viên Ocean Club
+                        <div class="flex items-center gap-2 pr-4 pl-1.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[11px] sm:text-xs font-bold tracking-wider uppercase">
+                            <div class="w-6 h-6 rounded-full flex items-center justify-center" :class="role === 'customer' ? 'bg-brand-secondary shadow-[0_0_10px_#F97316]' : 'bg-blue-500 shadow-[0_0_10px_#3B82F6]'">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-white" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                            </div>
+                            <span x-text="role === 'customer' ? 'Thành viên Ocean Club' : 'Hệ thống Đối tác B2B'">Thành viên Ocean Club</span>
+                        </div>
                     </div>
                     
-                    <h2 class="text-4xl xl:text-5xl font-bold leading-tight mb-6 drop-shadow-md">
-                        Đặc quyền nghỉ dưỡng<br>thượng lưu
+                    <h2 class="text-4xl xl:text-5xl font-bold leading-tight mb-6 drop-shadow-md transition-all duration-300" x-html="role === 'customer' ? 'Mở khoá đặc quyền du<br>lịch & nghỉ dưỡng<br>thượng lưu' : 'Nền tảng quản trị<br>đối tác toàn diện'">
+                        Mở khoá đặc quyền du<br>lịch & nghỉ dưỡng<br>thượng lưu
                     </h2>
-                    <p class="text-white/80 mb-12 text-base leading-relaxed max-w-md">
+                    <p class="text-white/80 mb-12 text-base leading-relaxed max-w-md transition-all duration-300" x-text="role === 'customer' ? 'Khám phá hành trình viễn du sang trọng, chạm tới những miền biển nguyên sơ cùng dịch vụ cá nhân hóa chuẩn quốc tế.' : 'Tối ưu hóa doanh thu với hệ thống đặt chỗ thông minh, chính sách hoa hồng minh bạch và công cụ quản lý khách hàng chuyên nghiệp.'">
                         Khám phá hành trình viễn du sang trọng, chạm tới những miền biển nguyên sơ cùng dịch vụ cá nhân hóa chuẩn quốc tế.
                     </p>
 
@@ -55,8 +59,8 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" /><path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd" /></svg>
                             </div>
                             <div>
-                                <h4 class="font-bold text-base">Tích lũy dặm thưởng đa tầng</h4>
-                                <p class="text-sm text-white/70 mt-1">Đổi tour miễn phí & nhận quà tặng cao cấp.</p>
+                                <h4 class="font-bold text-base transition-all duration-300" x-text="role === 'customer' ? 'Tích lũy dặm thưởng đa tầng' : 'Chiết khấu hoa hồng cực cao'">Tích lũy dặm thưởng đa tầng</h4>
+                                <p class="text-sm text-white/70 mt-1 transition-all duration-300" x-text="role === 'customer' ? 'Đổi tour miễn phí & nhận quà tặng cao cấp.' : 'Nhận chiết khấu trực tiếp trên mỗi booking thành công.'">Đổi tour miễn phí & nhận quà tặng cao cấp.</p>
                             </div>
                         </div>
 
@@ -66,8 +70,8 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clip-rule="evenodd" /></svg>
                             </div>
                             <div>
-                                <h4 class="font-bold text-base">Ưu đãi độc quyền đến 15%</h4>
-                                <p class="text-sm text-white/70 mt-1">Dành riêng cho hội viên đặt phòng suite.</p>
+                                <h4 class="font-bold text-base transition-all duration-300" x-text="role === 'customer' ? 'Ưu đãi độc quyền đến 15%' : 'Hỗ trợ ưu tiên 24/7'">Ưu đãi độc quyền đến 15%</h4>
+                                <p class="text-sm text-white/70 mt-1 transition-all duration-300" x-text="role === 'customer' ? 'Dành riêng cho hội viên đặt phòng suite.' : 'Đội ngũ chăm sóc khách hàng riêng biệt dành cho đại lý.'">Dành riêng cho hội viên đặt phòng suite.</p>
                             </div>
                         </div>
                     </div>
@@ -82,12 +86,12 @@
                         <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
                         <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
                     </div>
-                    <p class="text-base text-white/90 italic">"TourVN giúp gia đình tôi có chuyến đi Phú Quốc hoàn hảo ngoài mong đợi. Một trải nghiệm 5 sao thực sự."</p>
+                    <p class="text-base text-white/90 italic transition-all duration-300" x-text="role === 'customer' ? '&quot;TourVN giúp gia đình tôi có chuyến đi Phú Quốc hoàn hảo ngoài mong đợi. Một trải nghiệm 5 sao thực sự.&quot;' : '&quot;Hệ thống B2B của TourVN giúp công ty chúng tôi tăng 40% doanh số nhờ việc lên đơn và chốt khách quá nhanh chóng.&quot;'">"TourVN giúp gia đình tôi có chuyến đi Phú Quốc hoàn hảo ngoài mong đợi. Một trải nghiệm 5 sao thực sự."</p>
                     <div class="mt-4 flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-white/20"></div>
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center font-bold text-white/80 transition-all duration-300" x-text="role === 'customer' ? 'MT' : 'LN'"></div>
                         <div>
-                            <p class="text-sm font-bold text-white">Minh Trí</p>
-                            <p class="text-xs text-white/70">Hội viên Vàng</p>
+                            <p class="text-sm font-bold text-white transition-all duration-300" x-text="role === 'customer' ? 'Minh Trí' : 'Lan Ngọc'">Minh Trí</p>
+                            <p class="text-xs text-white/70 transition-all duration-300" x-text="role === 'customer' ? 'Hội viên Vàng' : 'Đại lý cấp 1'">Hội viên Vàng</p>
                         </div>
                     </div>
                 </div>

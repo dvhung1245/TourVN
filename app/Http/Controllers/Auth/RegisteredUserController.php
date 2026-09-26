@@ -32,13 +32,24 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'login' => [
+                'required', 'string', 'max:255',
+                function ($attribute, $value, $fail) {
+                    $field = filter_var($value, FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
+                    if (User::where($field, $value)->exists()) {
+                        $fail('Email hoặc Số điện thoại này đã được sử dụng.');
+                    }
+                },
+            ],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $login = $request->input('login');
+        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
+
         $user = User::create([
             'name' => $request->name,
-            'email' => $request->email,
+            $field => $login,
             'password' => Hash::make($request->password),
         ]);
 

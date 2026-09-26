@@ -28,6 +28,24 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        $user = $request->user();
+        $role = $request->input('login_role');
+
+        if ($role === 'agent') {
+            if (! $user->role_id) {
+                Auth::guard('web')->logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+
+                return redirect()->route('login')->withErrors([
+                    'login' => 'Tài khoản của bạn không có quyền truy cập Cổng đối tác.',
+                ]);
+            }
+            
+            // Redirect to agent/admin dashboard when route is available
+            // return redirect()->intended(route('admin.dashboard', absolute: false));
+        }
+
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
