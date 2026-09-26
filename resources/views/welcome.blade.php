@@ -61,32 +61,35 @@
     <body class="font-sans text-gray-800 antialiased bg-gray-50 selection:bg-teal-500 selection:text-white" x-data="{ scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)">
         
         <!-- Navbar -->
-        <nav :class="{'bg-white/90 backdrop-blur-md shadow-md py-4': scrolled, 'bg-transparent py-6': !scrolled}" class="fixed w-full z-50 transition-all duration-300">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center">
-                    <div class="flex items-center">
-                        <a href="/" class="text-2xl font-heading font-bold" :class="{'text-gray-900': scrolled, 'text-white': !scrolled}">
-                            Tour<span class="text-teal-500">VN</span>
-                        </a>
-                    </div>
-                    <div class="hidden md:flex space-x-8 items-center">
-                        <a href="#" class="font-medium hover:text-teal-500 transition-colors" :class="{'text-gray-600': scrolled, 'text-gray-200 hover:text-white': !scrolled}">Trang chủ</a>
-                        <a href="#destinations" class="font-medium hover:text-teal-500 transition-colors" :class="{'text-gray-600': scrolled, 'text-gray-200 hover:text-white': !scrolled}">Điểm đến</a>
-                        <a href="#tours" class="font-medium hover:text-teal-500 transition-colors" :class="{'text-gray-600': scrolled, 'text-gray-200 hover:text-white': !scrolled}">Tour phổ biến</a>
-                        <a href="#" class="font-medium hover:text-teal-500 transition-colors" :class="{'text-gray-600': scrolled, 'text-gray-200 hover:text-white': !scrolled}">Liên hệ</a>
-                    </div>
-                    <div class="hidden md:flex items-center space-x-4">
-                        @if (Route::has('login'))
-                            @auth
-                                <a href="{{ url('/dashboard') }}" class="px-5 py-2.5 rounded-full bg-teal-500 text-white font-medium hover:bg-teal-600 transition-all shadow-lg shadow-teal-500/30 hover:shadow-teal-500/50 transform hover:-translate-y-0.5">Bảng điều khiển</a>
-                            @else
-                                <a href="{{ route('login') }}" class="font-medium hover:text-teal-500 transition-colors" :class="{'text-gray-900': scrolled, 'text-white': !scrolled}">Đăng nhập</a>
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="px-5 py-2.5 rounded-full bg-teal-500 text-white font-medium hover:bg-teal-600 transition-all shadow-lg shadow-teal-500/30 hover:shadow-teal-500/50 transform hover:-translate-y-0.5">Đăng ký</a>
-                                @endif
-                            @endauth
-                        @endif
-                    </div>
+        <nav class="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-in-out"
+             :class="{'pt-4': scrolled, 'pt-6': !scrolled}">
+            <div class="mx-auto transition-all duration-500 ease-in-out flex justify-between items-center"
+                 :class="{
+                     'max-w-5xl bg-white/95 backdrop-blur-lg shadow-[0_8px_30px_rgb(0,0,0,0.12)] py-3 px-8 rounded-full border border-gray-200/50': scrolled, 
+                     'max-w-7xl bg-transparent backdrop-blur-none shadow-none py-2 px-4 sm:px-6 lg:px-8 rounded-full border border-transparent': !scrolled
+                 }">
+                <div class="flex items-center">
+                    <a href="/" class="text-2xl font-heading font-bold transition-colors duration-300" :class="{'text-gray-900': scrolled, 'text-white': !scrolled}">
+                        Tour<span class="text-teal-500">VN</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#" class="font-semibold hover:text-teal-500 transition-colors duration-300" :class="{'text-gray-800': scrolled, 'text-gray-100 hover:text-white': !scrolled}">Trang chủ</a>
+                    <a href="#destinations" class="font-semibold hover:text-teal-500 transition-colors duration-300" :class="{'text-gray-800': scrolled, 'text-gray-100 hover:text-white': !scrolled}">Điểm đến</a>
+                    <a href="#tours" class="font-semibold hover:text-teal-500 transition-colors duration-300" :class="{'text-gray-800': scrolled, 'text-gray-100 hover:text-white': !scrolled}">Tour phổ biến</a>
+                    <a href="#" class="font-semibold hover:text-teal-500 transition-colors duration-300" :class="{'text-gray-800': scrolled, 'text-gray-100 hover:text-white': !scrolled}">Liên hệ</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-5">
+                    @if (Route::has('login'))
+                        @auth
+                            <a href="{{ url('/dashboard') }}" class="px-6 rounded-full bg-teal-500 text-white font-bold hover:bg-teal-600 transition-all duration-300 shadow-lg shadow-teal-500/30 hover:shadow-teal-500/50 transform hover:-translate-y-0.5" :class="{'py-2 text-sm': scrolled, 'py-2.5': !scrolled}">Bảng điều khiển</a>
+                        @else
+                            <a href="{{ route('login') }}" class="font-semibold hover:text-teal-500 transition-colors duration-300" :class="{'text-gray-800': scrolled, 'text-white': !scrolled}">Đăng nhập</a>
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}" class="px-6 rounded-full bg-teal-500 text-white font-bold hover:bg-teal-600 transition-all duration-300 shadow-lg shadow-teal-500/30 hover:shadow-teal-500/50 transform hover:-translate-y-0.5" :class="{'py-2 text-sm': scrolled, 'py-2.5': !scrolled}">Đăng ký</a>
+                            @endif
+                        @endauth
+                    @endif
                 </div>
             </div>
         </nav>
