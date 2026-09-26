@@ -26,6 +26,13 @@ return new class extends Migration
             $table->integer('duration_nights')->default(0);
             $table->decimal('price_adult', 15, 2)->default(0);
             $table->decimal('price_child', 15, 2)->default(0);
+            $table->string('image')->nullable();
+            $table->string('departure_location')->nullable();
+            $table->string('transport')->nullable();
+            $table->text('highlights')->nullable();
+            $table->text('included')->nullable();
+            $table->text('excluded')->nullable();
+            $table->boolean('is_featured')->default(false);
             $table->string('status')->default('Draft');
             $table->timestamps();
         });

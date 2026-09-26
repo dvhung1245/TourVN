@@ -16,10 +16,10 @@ export default {
             },
             colors: {
                 brand: {
-                    primary: '#0F766E',
-                    secondary: '#F97316',
-                    tertiary: '#059669',
-                    neutral: '#0F172A',
+                    primary: '#1D4ED8',
+                    secondary: '#0284C7',
+                    tertiary: '#0F172A',
+                    neutral: '#64748B',
                 }
             }
         },

@@ -17,4 +17,24 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::middleware('guest')->group(function () {
+        Route::get('login', [\App\Http\Controllers\Admin\Auth\AuthenticatedSessionController::class, 'create'])->name('login');
+        Route::post('login', [\App\Http\Controllers\Admin\Auth\AuthenticatedSessionController::class, 'store']);
+    });
+
+    Route::middleware(['auth', 'isAdmin'])->group(function () {
+        Route::get('dashboard', function () {
+            return view('admin.dashboard');
+        })->name('dashboard');
+
+        Route::post('logout', [\App\Http\Controllers\Admin\Auth\AuthenticatedSessionController::class, 'destroy'])->name('logout');
+        
+        Route::resource('tour_categories', \App\Http\Controllers\Admin\TourCategoryController::class);
+        Route::resource('tours', \App\Http\Controllers\Admin\TourController::class);
+        Route::resource('departures', \App\Http\Controllers\Admin\DepartureController::class);
+        Route::resource('bookings', \App\Http\Controllers\Admin\BookingController::class);
+    });
+});
+
 require __DIR__.'/auth.php';

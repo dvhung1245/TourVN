@@ -15,6 +15,18 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.tour_categories.index')" :active="request()->routeIs('admin.tour_categories.*')">
+                        Danh mục Tour
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.tours.index')" :active="request()->routeIs('admin.tours.*')">
+                        Quản lý Tour
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.departures.index')" :active="request()->routeIs('admin.departures.*')">
+                        Lịch khởi hành
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.bookings.index')" :active="request()->routeIs('admin.bookings.*')">
+                        Quản lý Booking
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -39,10 +51,10 @@
                         </x-dropdown-link>
 
                         <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
+                        <form method="POST" action="{{ request()->is('admin*') ? route('admin.logout') : route('logout') }}">
                             @csrf
 
-                            <x-dropdown-link :href="route('logout')"
+                            <x-dropdown-link :href="request()->is('admin*') ? route('admin.logout') : route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
@@ -85,10 +97,10 @@
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
+                <form method="POST" action="{{ request()->is('admin*') ? route('admin.logout') : route('logout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('logout')"
+                    <x-responsive-nav-link :href="request()->is('admin*') ? route('admin.logout') : route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
