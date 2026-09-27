@@ -15,17 +15,17 @@
     <!-- Navbar -->
     <nav x-data="{ scrolled: false, mobileMenu: false }" 
          @scroll.window="scrolled = (window.pageYOffset > 20) ? true : false"
-         :class="{ 'bg-white/90 backdrop-blur-md shadow-sm': scrolled, 'bg-transparent': !scrolled }"
-         class="fixed w-full z-50 transition-all duration-300 py-4">
+         :class="{ 'bg-white/80 backdrop-blur-xl border-slate-200/50 shadow-sm py-3': scrolled, 'bg-transparent border-transparent py-6': !scrolled }"
+         class="fixed w-full z-50 transition-all duration-500 ease-in-out border-b">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">
                 <!-- Logo -->
                 <div class="flex items-center gap-2">
                     <a href="{{ route('home') }}" class="flex items-center gap-2 group">
-                        <svg xmlns="http://www.w3.org/2000/svg" :class="scrolled ? 'text-brand-primary' : 'text-white'" class="h-8 w-8 transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" :class="scrolled ? 'text-brand-primary' : 'text-white'" class="h-8 w-8 transition-colors duration-500 ease-in-out" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
                         </svg>
-                        <span :class="scrolled ? 'text-slate-900' : 'text-white'" class="text-2xl font-bold tracking-tight transition-colors">
+                        <span :class="scrolled ? 'text-slate-900' : 'text-white'" class="text-2xl font-bold tracking-tight transition-colors duration-500 ease-in-out">
                             TourVN
                         </span>
                     </a>
@@ -33,17 +33,17 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#" :class="scrolled ? 'text-slate-600 hover:text-brand-primary' : 'text-white/90 hover:text-white'" class="font-medium transition-colors text-sm">Trang chủ</a>
-                    <a href="#" :class="scrolled ? 'text-slate-600 hover:text-brand-primary' : 'text-white/90 hover:text-white'" class="font-medium transition-colors text-sm">Điểm đến</a>
-                    <a href="#" :class="scrolled ? 'text-slate-600 hover:text-brand-primary' : 'text-white/90 hover:text-white'" class="font-medium transition-colors text-sm">Du thuyền</a>
-                    <a href="#" :class="scrolled ? 'text-slate-600 hover:text-brand-primary' : 'text-white/90 hover:text-white'" class="font-medium transition-colors text-sm">Khuyến mãi</a>
+                    <a href="#" :class="scrolled ? 'text-slate-600 hover:text-brand-primary' : 'text-white/90 hover:text-white'" class="font-medium transition-colors duration-500 ease-in-out text-sm">Trang chủ</a>
+                    <a href="#" :class="scrolled ? 'text-slate-600 hover:text-brand-primary' : 'text-white/90 hover:text-white'" class="font-medium transition-colors duration-500 ease-in-out text-sm">Điểm đến</a>
+                    <a href="#" :class="scrolled ? 'text-slate-600 hover:text-brand-primary' : 'text-white/90 hover:text-white'" class="font-medium transition-colors duration-500 ease-in-out text-sm">Du thuyền</a>
+                    <a href="#" :class="scrolled ? 'text-slate-600 hover:text-brand-primary' : 'text-white/90 hover:text-white'" class="font-medium transition-colors duration-500 ease-in-out text-sm">Khuyến mãi</a>
                 </div>
 
                 <!-- Auth Buttons -->
                 <div class="hidden md:flex items-center space-x-4">
                     @auth
                         <div class="relative" x-data="{ open: false }">
-                            <button @click="open = !open" :class="scrolled ? 'text-slate-700 bg-slate-100 hover:bg-slate-200' : 'text-white bg-white/20 hover:bg-white/30 backdrop-blur-sm'" class="flex items-center gap-2 px-4 py-2 rounded-full transition-all font-semibold text-sm">
+                            <button @click="open = !open" :class="scrolled ? 'text-slate-700 bg-white border-slate-200 hover:bg-slate-50 hover:border-slate-300 shadow-sm' : 'text-white bg-white/20 border-white/20 hover:bg-white/30 backdrop-blur-md'" class="flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-500 ease-in-out font-semibold text-sm border">
                                 <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&color=fb923c&background=fff7ed" class="w-6 h-6 rounded-full" alt="Avatar">
                                 {{ Auth::user()->name }}
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
@@ -57,7 +57,7 @@
                             </div>
                         </div>
                     @else
-                        <a href="{{ route('login') }}" :class="scrolled ? 'text-slate-700 hover:bg-slate-50' : 'text-white hover:bg-white/10'" class="px-5 py-2.5 rounded-full font-semibold transition-all text-sm">Đăng nhập</a>
+                        <a href="{{ route('login') }}" :class="scrolled ? 'text-slate-700 hover:text-brand-primary' : 'text-white/90 hover:text-white'" class="font-semibold transition-colors duration-500 ease-in-out text-sm px-2">Đăng nhập</a>
                         <a href="{{ route('register') }}" class="px-5 py-2.5 bg-brand-primary hover:bg-brand-secondary text-white rounded-full font-bold shadow-lg shadow-brand-primary/30 transition-all hover:-translate-y-0.5 text-sm">Đăng ký</a>
                     @endauth
                 </div>
